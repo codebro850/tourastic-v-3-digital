@@ -1,0 +1,331 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% load static %}
+ <!-- book tour modal -->
+    <div class="modal fade bd-example-modal-lg book-tour-modal" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+
+                <!-- book modal -->
+                <form class="book-form" >
+                {% csrf_token %}
+                    <h4>Customize & Book Tour Now.</h4>
+                    <div class="form-row align-items-center">
+
+
+                        <div class="col-auto">
+                            <input type="date"  class="form-control mb-2" id="traveldate12" name="traveldate"
+                                placeholder="Travelling Date" required default-value="0/00/0000" >
+                        </div>
+
+                        <div class="col-auto">
+
+                            <input type="number" class="form-control mb-2" id="adult" name="adult" required
+                                placeholder="Number of Adult" default=0>
+
+
+                            </input>
+                        </div>
+
+                        
+                        <div class="col-auto">
+
+                            <input type="number" class="form-control mb-2" id="child" name="child"
+                                placeholder="Number of Child" default=0>
+
+
+                            </input>
+                        </div>
+
+
+                        
+                        <div class="col-auto">
+
+                            <input style="width:290px;" type="number" class="form-control mb-2" id="infants" name="infants" 
+                                placeholder="Number of Child (under age 3)" defaultvalue=0>
+
+
+                            </input>
+                        </div>
+                        <div id="productid" style="display:none;">{{ package_info.package_title }}</div>
+                        <div id="daterequired" style="color:red; "></div>
+
+                        <div class="col-auto">
+                            <button type="submit"  id="bookthepackage" class="btn btn-primary mb-2">Book</button>
+
+                        </div>
+                    </div>
+                </form>
+             <div style="display:none"> <a href="" data-toggle="modal" data-target="#modalLRForm" id="loginform234"> <i class="fa fa-user" aria-hidden="true"></i>
+                login/signup</a> </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="img">
+
+        <h2>{{package_info.package_title}}</h2>
+        <img src="/media/{{package_info.package_images}}" class="img-fluid" alt="">
+
+    </div>
+
+
+    <div class="content">
+
+        <div class="disc">
+            <hr>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col icons">
+
+                        <div class="icon">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="sub-title">
+                            <p>Duration</p>
+                            <div id="tour-days" style="display:none"> {{package_info.package_duration}}</div>
+                            <p id="p2">{{package_info.package_desc}}</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col icons">
+
+                        <div class="icon">
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="sub-title">
+                            <p>Rating</p>
+                            <p id="p2">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
+
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="w-100"></div>
+
+
+                    <div class="col icons">
+
+                        <div class="icon">
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="sub-title">
+                            <p>Group size</p>
+                            <p id="p2">Unlimited</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col icons">
+
+                        <div class="icon">
+                            <i class="fa fa-inr" aria-hidden="true"></i>
+                        </div>
+                        {% ifequal package.discount  0%}
+                        <div class="sub-title">
+                            <p>Price</p>
+                            <p id="p2">From - ₹ {{package.price}} /-</p>
+                        </div>
+                        {% else %}
+                         <div class="sub-title">
+                            <p>Price</p>
+                            <p id="p2">From - <strike>₹ {{package.tour.package_price}}</strike><tab>{{package.price}}</p>
+                        </div>
+
+                        {% endifequal %}
+                        
+
+                    </div>
+
+                </div>
+
+
+                <div class="book-btn">
+                    <button class="btn" data-toggle="modal" data-target=".bd-example-modal-lg">Book Now</button>
+                    <button data-product="{{package.tour.package_title}}" type="submit"  data-action="add" class=" btn btn-warning form-control update-cart">Add to Cart</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+    <hr style="margin: 5px 100px;">
+
+    <div class="overview">
+        <h4>Overview</h4>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et praesentium consequatur animi incidunt
+            perferendis consequuntur, fuga ex impedit consectetur modi, eius hic eos quam labore laudantium numquam?
+            Sint saepe omnis eos repellat soluta inventore?</p>
+    </div>
+
+    <hr style="margin: 5px 100px;">
+
+    <div class="itinerary-title">
+        <h2
+            style="text-align: center; font-family: 'Times New Roman', Times, serif; color: rgb(80, 77, 77); text-decoration: underline;">
+            Itinerary</h2>
+    </div>
+
+    <div class="itinerary">
+
+
+        <div class="vertical-line"></div>
+
+        <div class="days">
+            <div id="day1" data-aos="zoom-in">
+                <h3>DAY 1</h3>
+                <h6>Today is when your memorable trip to Dubai begins. On your very first day of the Dubai tour you will
+                    arrive at the Dubai international airport and our representative will greet you at the airport.
+
+                    From the airport you will be transferred straight to your hotel where you can relax and freshen up
+                    after a tiring flight. The rest of the day is at your leisure. We recommend you to soak-in the
+                    beautiful aura of this amazing city. Not many cities in the world have achieved the perfect blend of
+                    luxury, architecture and cultural highlight in such a short span as Dubai.
+                </h6>
+            </div>
+
+            <div id="day2" data-aos="zoom-in">
+                <h3>DAY 2</h3>
+                <h6>Today is when your memorable trip to Dubai begins. On your very first day of the Dubai tour you will
+                    arrive at the Dubai international airport and our representative will greet you at the airport.
+
+                    From the airport you will be transferred straight to your hotel where you can relax and freshen up
+                    after a tiring flight. The rest of the day is at your leisure. We recommend you to soak-in the
+                    beautiful aura of this amazing city. Not many cities in the world have achieved the perfect blend of
+                    luxury, architecture and cultural highlight in such a short span as Dubai.
+                </h6>
+            </div>
+
+            <div id="day3" data-aos="zoom-in">
+                <h3>DAY 3</h3>
+                <h6>Today is when your memorable trip to Dubai begins. On your very first day of the Dubai tour you will
+                    arrive at the Dubai international airport and our representative will greet you at the airport.
+
+                    From the airport you will be transferred straight to your hotel where you can relax and freshen up
+                    after a tiring flight. The rest of the day is at your leisure. We recommend you to soak-in the
+                    beautiful aura of this amazing city. Not many cities in the world have achieved the perfect blend of
+                    luxury, architecture and cultural highlight in such a short span as Dubai.
+                </h6>
+            </div>
+
+            <div id="day4" data-aos="zoom-in">
+                <h3>DAY 4</h3>
+                <h6>Today is when your memorable trip to Dubai begins. On your very first day of the Dubai tour you will
+                    arrive at the Dubai international airport and our representative will greet you at the airport.
+
+                    From the airport you will be transferred straight to your hotel where you can relax and freshen up
+                    after a tiring flight. The rest of the day is at your leisure. We recommend you to soak-in the
+                    beautiful aura of this amazing city. Not many cities in the world have achieved the perfect blend of
+                    luxury, architecture and cultural highlight in such a short span as Dubai.
+                </h6>
+            </div>
+
+            <div id="day5" data-aos="zoom-in">
+                <h3>DAY 5</h3>
+                <h6>Today is when your memorable trip to Dubai begins. On your very first day of the Dubai tour you will
+                    arrive at the Dubai international airport and our representative will greet you at the airport.
+
+                    From the airport you will be transferred straight to your hotel where you can relax and freshen up
+                    after a tiring flight. The rest of the day is at your leisure. We recommend you to soak-in the
+                    beautiful aura of this amazing city. Not many cities in the world have achieved the perfect blend of
+                    luxury, architecture and cultural highlight in such a short span as Dubai.
+                </h6>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- included Facility  -->
+    <section class="section2">
+
+        <div class="itinerary" data-aos="zoom-in-up">
+            <h3 style="margin-left: 20px;">Included Facility</h3>
+        </div>
+
+        <div class="flex-container">
+            <div class="flex-item-left" data-aos="flip-down">
+
+                <img class="img-flex" src="{% static 'assets/images/visa1.jpg'%}" alt="">
+                <h4 class="flex-img-title">Visa</h4>
+
+            </div>
+
+            <div class="flex-item-left" data-aos="flip-down">
+
+                <img class="img-flex" src="{% static 'assets/images/pexels-engin-akyurt-2736388.jpg'%}" alt="">
+                <h4 class="flex-img-title">4 Night Hotel accommodation</h4>
+
+            </div>
+
+            <div class="flex-item-left" data-aos="flip-down">
+
+
+                <img class="img-flex" src="{% static 'assets/images/breakfast-1804436_1280.jpg'%}" alt="">
+                <h4 class="flex-img-title">Daily Breakfast</h4>
+
+            </div>
+        </div>
+
+        <div class="flex-container">
+
+            <div class="flex-item-left" data-aos="flip-down">
+                <img class="img-flex" src="{% static 'assets/images/marina cruise.jpg'%}" alt="">
+                <h4 class="flex-img-title">Marina Cruise Dinner</h4>
+
+            </div>
+
+            <div class="flex-item-left" data-aos="flip-down">
+                <img class="img-flex" src="{% static 'assets/images/desert safari.jpg'%}" alt="">
+                <h4 class="flex-img-title">Desert Safari with Dinner</h4>
+
+            </div>
+
+            <div class="flex-item-left" data-aos="flip-down">
+                <img class="img-flex" src="{% static 'assets/images/dubai city tour.jpg'%}" alt="">
+                <h4 class="flex-img-title">Dubai City Tour</h4>
+
+            </div>
+
+        </div>
+
+        <div class="flex-container">
+
+            <div class="flex-item-left" data-aos="flip-down">
+                <img class="img-flex" src="{% static 'assets/images/airport.jpg'%}" alt="">
+                <h4 class="flex-img-title">Airport Transfers</h4>
+
+            </div>
+        </div>
+
+    </section>
+    <!-- included Facility  -->
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,292 @@
+{% extends 'base.html' %}{% load static %} {% load humanize %}{% block style %}
+<link
+  href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600"
+  rel="stylesheet"
+  type="text/css"
+/>
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+/>
+<!-- Google Fonts -->
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+/>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap"
+  rel="stylesheet"
+/>
+<!-- Bootstrap core CSS -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+
+<!-- Bootstrap CSS CDN -->
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"> -->
+<!-- Our Custom CSS -->
+<!-- <link rel="stylesheet" href="style3.css"> -->
+
+<!-- Scrollbar Custom CSS -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
+/>
+<!-- Material Design Bootstrap -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<!-- custom CSS -->
+<link rel="stylesheet" href="{% static 'assets/css/navigation.css'%}" />
+<link rel="stylesheet" href="{% static 'assets/css/order-overview.css'%}" />
+
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+  rel="stylesheet"
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap"
+  rel="stylesheet"
+/>
+
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<style>
+  button {
+    width: 100%;
+    padding: 10px 0;
+    margin: 10px auto;
+    border-radius: 5px;
+    border: none;
+    background: #8ebf42;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0000;
+  }
+  input {
+    padding: 6px;
+    margin-left: 10px;
+    outline: none;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 20px;
+    color: black;
+    background-color: blue;
+  }
+  button:hover {
+    background: #82b534;
+  }
+</style>
+{% endblock style %} {% load mathfilters %} {% block content %} {% comment %}
+<div class="main-block">
+  <form action="{% url 'payment_status' %}" method="POST">
+    {% csrf_token %}
+
+    <h1>Creating order</h1>
+    <fieldset>
+      <legend>
+        <h3>Selected Product</h3>
+      </legend>
+
+      <div class="gender">
+        Product {{ package.package_title }} Price {{ order_amount }}
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>
+        <h3>Personal Details</h3>
+      </legend>
+      <div class="personal-details">
+        <div>
+          <div>
+            <label>Name*</label
+            ><input
+              type="text"
+              name="name"
+              placeholder="{{ user.email }}"
+              disabled
+            />
+          </div>
+          <div>
+            <label>Phone*</label
+            ><input
+              type="text"
+              name="name"
+              placeholder="{{ user.email }}"
+              disabled
+            />
+          </div>
+          <div>
+            <label>Email*</label
+            ><input
+              type="text"
+              name="name"
+              placeholder="{{user.email }}"
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <script
+      src="https://checkout.razorpay.com/v1/checkout.js"
+      data-key="rzp_test_ohASjZactVTRw1"
+      data-amount="{{order_amount}}"
+      data-currency="INR"
+      data-order_id="{{ order_id }}"
+      data-buttontext="Pay with Razorpay"
+      data-name="Tourastic Holidays"
+      data-description="{{order_amount}}"
+      data-image="{% static  'assets/images/short-logo.png'%}"
+      data-prefill.name="{{ user.username }}"
+      data-prefill.email="{{ user.email }}"
+      data-theme.color="#F37254"
+    ></script>
+    <input type="hidden" custom="Hidden Element" name="hidden" />
+  </form>
+</div>
+{% endcomment %}
+
+<div class="wrap cf">
+  <form action="{% url 'payment_status' %}" method="POST">
+    <!-- <h1 class="projTitle"><span>Cart</span> </h1> -->
+    <div class="heading cf">
+      <h1>Check Your Order</h1>
+    </div>
+    {% csrf_token %}
+    <div class="cart">
+      <ul class="cartWrap">
+        <li class="items even">
+          <div class="infoWrap">
+            <div class="cartSection">
+              <img
+                src="/media/{{package.package_images}}"
+                alt=""
+                class="itemImg"
+              />
+              <h3>{{package.package_title}}</h3>
+              <p>Departure date: {{items.date_tour}}</p>
+              <p>
+                Duration: {{package.package_duration}} Days
+                {{package.package_duration|add:1}} Nights
+              </p>
+              {% ifequal discount 0%} {% if promocode %}
+              <p>
+                From
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                <strike> {{package.package_price|intcomma}} </strike>
+              </p>
+              <p>
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                {{price|intcomma}}
+              </p>
+              <p style="color: green; font-size: 20px">
+                You save ₹ {{promodis}} /- on this trip
+              </p>
+              {% else %}
+              <p>
+                From
+                <i class="fa fa-inr" aria-hidden="true"></i>{{price|intcomma}}
+              </p>
+
+              {% endif %} {% else %}
+              <p>
+                From
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                <strike> {{package.package_price|intcomma}} </strike>
+              </p>
+              <p>
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                {{price|intcomma}}
+              </p>
+              {% endifequal %}
+
+              <div class="booking-details">
+                <p id="booking-title">Booking Details</p>
+
+                <p class="bd">
+                  Adult:{{items.passengers}} x
+                  <i class="fa fa-inr" aria-hidden="true"></i>
+                  {{price|intcomma}} /-
+                  <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                  <i class="fa fa-inr" aria-hidden="true"></i>
+                  {{price|mul:items.passengers|intcomma }} /-
+                </p>
+
+                <p class="bd">
+                  Child: {{items.child}} x
+                  <i class="fa fa-inr" aria-hidden="true"></i>
+                  {{price|div:2|intcomma}} /-
+                  <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                  <i class="fa fa-inr" aria-hidden="true"></i>
+                  {{price|mul:items.child|div:2}} /-
+                </p>
+
+                <p class="bd">
+                  Inflant (Under age 2): {{items.infants}} x
+                  <i class="fa fa-inr" aria-hidden="true"></i> 0 /-
+                  <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                  <i class="fa fa-inr" aria-hidden="true"></i> 0 /-
+                </p>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="prodTotal cartSection">
+      <h4>
+        Total Amount -
+        <i class="fa fa-inr" aria-hidden="true"></i> {{order_amount|intcomma}}
+        /-
+      </h4>
+    </div>
+
+    <hr style="margin-top: 40px" />
+
+    <script
+      src="https://checkout.razorpay.com/v1/checkout.js"
+      data-key="rzp_test_ohASjZactVTRw1"
+      data-amount="{{order_amount}}"
+      data-currency="INR"
+      data-order_id="{{ order_id }}"
+      data-buttontext="Continue to Pay"
+      data-name="Tourastic Holidays"
+      data-description="{{order_amount}}"
+      data-image="{% static  'assets/images/short-logo.png'%}"
+      data-prefill.name="{{ user.username }}"
+      data-prefill.email="{{ user.email }}"
+      data-theme.color="#F37254"
+    ></script>
+
+    <input type="hidden" custom="Hidden Element" name="hidden" />
+  </form>
+</div>
+{% endblock content %} {% block javacsript %}
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
+></script>
+
+{% endblock javacsript %}

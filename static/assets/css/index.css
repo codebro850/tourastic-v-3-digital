@@ -1,0 +1,509 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.banner {
+  width: 100%;
+  position: relative;
+  /* z-index: -1; */
+}
+
+.banner .swiper-container {
+  width: 100%;
+  height: 90vh;
+}
+
+.banner .swiper-container .swiper-slide {
+  position: relative;
+}
+
+.banner .swiper-container .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.banner .swiper-container .swiper-slide .caption {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 60%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.banner .swiper-container .swiper-slide .caption h1 {
+  color: #000;
+  font-size: 4em;
+  width: 50%;
+  font-weight: 900;
+  text-transform: capitalize;
+}
+
+/* .banner .swiper-container  div.swiper-button-prev  div.swiper-button-next:hover {
+    background-color: #dd1818;
+    color: aquamarine;
+
+} */
+.lines {
+  width: 20px;
+  height: 3px;
+  background-color: black;
+  margin-top: 2px;
+  border-radius: 35%;
+}
+
+form .fixedElement {
+  width: 100%;
+  margin: auto;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.search-form {
+  background-color: #151922;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+form h4 {
+  text-align: center;
+  padding-right: 10px;
+  padding-left: 10px;
+  color: wheat;
+}
+
+.form-control {
+  background-color: transparent;
+}
+
+/* // TOP DESTINATION, TOUR GUIDES, HAPPY TRAVELER */
+#short-intro {
+  width: 100%;
+  padding: 50px 0;
+  margin-top: 50px;
+}
+
+#short-intro title {
+  text-align: center;
+}
+
+#short-intro .title-primary {
+  color: #1ab3f0;
+  font-family: "Satisfy", cursive;
+  text-align: center;
+  position: relative;
+}
+
+#short-intro .title-primary:before {
+  content: "Intro";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 120px;
+  opacity: 0.1;
+  color: #000000;
+  z-index: -1;
+}
+
+#short-intro .title .title-secondary {
+  font-weight: 700;
+}
+
+#short-intro .h1 {
+  text-align: center;
+}
+
+.section2 {
+  margin-top: 50px;
+}
+
+.flex-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  font-size: 30px;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.flex-item-left {
+  padding: 10px;
+  -webkit-box-flex: 50%;
+  -ms-flex: 50%;
+  flex: 50%;
+}
+
+.flex-item-right {
+  background-color: dodgerblue;
+  padding: 10px;
+  -webkit-box-flex: 50%;
+  -ms-flex: 50%;
+  flex: 50%;
+}
+
+.img-flex {
+  width: 60px;
+}
+
+.flex-img-title {
+  font-family: "Ubuntu", sans-serif;
+  color: #746e6e;
+}
+
+.flex-img-detail {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  margin-top: 5px;
+  color: #5a5a5a;
+}
+
+/* TOP DESTINATION, TOUR GUIDES, HAPPY TRAVELER */
+/* top destination */
+#popular-destinations {
+  width: 100%;
+  padding: 50px 0;
+  margin-top: 50px;
+}
+
+#popular-destinations title {
+  text-align: center;
+}
+
+#popular-destinations .title-primary {
+  color: #1ab3f0;
+  font-family: "Satisfy", cursive;
+  text-align: center;
+  position: relative;
+}
+
+#popular-destinations .title-primary:before {
+  content: "featured";
+  position: absolute;
+  top: 140%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  opacity: 0.1;
+  color: #000000;
+  z-index: -1;
+}
+
+#popular-destinations .title .title-secondary {
+  font-weight: 700;
+}
+
+#popular-destinations .h1 {
+  text-align: center;
+}
+
+/* box layout */
+.round,
+.round-img {
+  border-radius: 5px;
+  -webkit-transition: 1s;
+  transition: 1s;
+  cursor: pointer;
+}
+
+.round-img:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+#tours-title {
+  width: 100%;
+  padding: 50px 0;
+  margin-top: 0px;
+}
+
+#tours-title title {
+  text-align: center;
+}
+
+#tours-title .title-primary {
+  color: #1ab3f0;
+  font-family: "Satisfy", cursive;
+  text-align: center;
+  position: relative;
+}
+
+#tours-title .title-primary-sale:before {
+  content: "top sale";
+  font-family: "Satisfy", cursive;
+  position: absolute;
+  top: 140%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  opacity: 0.1;
+  color: #000000;
+  z-index: -1;
+}
+
+#tours-title .title-primary-featured:before {
+  content: "featured";
+  font-family: "Satisfy", cursive;
+  position: absolute;
+  top: 140%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  opacity: 0.1;
+  color: #000000;
+  z-index: -1;
+}
+
+#tours-title .title .title-secondary {
+  font-weight: 700;
+}
+
+#tours-title .h1 {
+  text-align: center;
+}
+
+.swiper-container .swiper-wrapper .swiper-slide .card {
+  height: 450px;
+  border: 0.25px solid #d3cfcf;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-bottom: none;
+}
+
+.swiper-slide .card {
+  margin-bottom: 100px;
+}
+
+.days-prices {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 10px;
+}
+
+.days {
+  padding: 5px 10px 10px 20px;
+  left: 0;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 10px;
+}
+
+.days h6 {
+  padding-left: 10px;
+}
+
+.price {
+  padding: 5px 10px 10px 30px;
+  position: absolute;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.price2 {
+  padding: 5px 10px 10px 30px;
+  position: absolute;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 40px;
+}
+
+.price .text-from {
+  margin-top: 10px;
+}
+
+.fa-inr {
+  padding: 0px 5px 0 10px;
+}
+
+.fa-star-o {
+  padding-left: 4px;
+  color: #f1b430;
+}
+
+/* modal */
+.box {
+  position: relative;
+}
+
+.box img {
+  width: 100%;
+  height: 450px;
+}
+
+.img-favrate {
+  position: absolute;
+  color: transparent;
+  text-align: center;
+  left: 0;
+  right: 5%;
+  top: 3%;
+}
+
+#img-title {
+  position: absolute;
+  color: #fff;
+  text-align: center;
+  left: 0;
+  right: 0;
+  top: 40%;
+  letter-spacing: 3px;
+}
+
+#img-title .title-primary {
+  color: #1ab3f0;
+  font-family: "Satisfy", cursive;
+  text-align: center;
+  position: relative;
+}
+
+#img-title .title .title-secondary {
+  font-weight: 700;
+}
+
+.blur {
+  -webkit-filter: blur(5px);
+  /* Safari 6.0 - 9.0 */
+  filter: blur(5px);
+}
+
+.offer {
+  position: absolute;
+  left: 0;
+  top: 10%;
+}
+
+.offer button {
+  background-color: black;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 0px 2px 2px 0px;
+}
+
+.nav-tabs .nav-item .nav-link {
+  color: black;
+}
+
+.testimonial {
+  margin-bottom: 50px;
+}
+
+.testimonial .swiper-container .swiper-wrapper .swiper-slide .card {
+  width: 300px;
+  margin: auto;
+  height: 400px;
+  border: 1px solid #c21212;
+  background-color: #22304e;
+  color: white;
+}
+
+.card .inner-monial {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 0;
+  height: 100%;
+}
+
+.card .inner-monial img {
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+}
+
+.card .inner-monial #monial-name {
+  margin-top: 5px;
+}
+
+.card .inner-monial #monial-post {
+  margin-top: 5px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 500;
+}
+
+.card .inner-monial p {
+  text-align: center;
+  padding: 1px 10px 10px 20px;
+}
+
+#testiM .swiper-button-prev {
+  margin-left: 10px;
+}
+
+#testiM .swiper-button-next {
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 650px) {
+  .banner {
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: 1010px) {
+  .fixedElement {
+    display: block;
+  }
+  .col-auto {
+    margin: 20px;
+  }
+  .flex-container {
+    display: -ms-grid;
+    display: grid;
+  }
+  .hide {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .post-slider .post-wrapper .post .card {
+    width: 350px;
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: 839px) {
+  .swiper-container .swiper-button-prev,
+  .swiper-container .swiper-button-next {
+    display: none;
+  }
+}
+/*# sourceMappingURL=index.css.map */

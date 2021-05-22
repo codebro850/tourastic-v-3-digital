@@ -1,0 +1,555 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block style %}
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS CDN -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"> -->
+    <!-- Our Custom CSS -->
+    <!-- <link rel="stylesheet" href="style3.css"> -->
+
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/navigation.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/tour-demo.css'%}">
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Headland+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+
+
+{% endblock style %}
+  
+{% load mathfilters %}
+
+{% block content %}
+
+ 
+
+
+   <!-- book tour modal -->
+    <div class="modal fade bd-example-modal-lg book-tour-modal" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+
+                <!-- book modal -->
+                <form class="book-form" >
+                {% csrf_token %}
+                    <h4>Customize & Book Tour Now.</h4>
+                    <div class="form-row align-items-center">
+
+
+                        <div class="col-auto">
+                            <input type="date"  class="form-control mb-2" id="traveldate12" name="traveldate"
+                                placeholder="Travelling Date" required default-value="0/00/0000" >
+                        </div>
+
+                        <div class="col-auto">
+
+                            <input type="number" class="form-control mb-2" id="adult" name="adult" required
+                                placeholder="Number of Adult" default=0>
+
+
+                            </input>
+                        </div>
+
+                        
+                        <div class="col-auto">
+
+                            <input type="number" class="form-control mb-2" id="child" name="child"
+                                placeholder="Number of Child" default=0>
+
+
+                            </input>
+                        </div>
+
+
+                        
+                        <div class="col-auto">
+
+                            <input style="width:290px;" type="number" class="form-control mb-2" id="infants" name="infants" 
+                                placeholder="Number of Child (under age 3)" defaultvalue=0>
+
+
+                            </input>
+                        </div>
+                         <div class="col-auto">
+
+                            <input type="text" class="form-control mb-2" id="promocode"
+                                placeholder="Enter Promocode (optional)"/>
+                            <span></span>
+                            
+                        </div>
+
+                        <div id="productid" style="display:none;">{{ package_info.package_title }}</div>
+                        <div id="daterequired" style="color:red; "></div>
+
+                        <div class="col-auto">
+                            <button type="submit"  id="bookthepackage" class="btn btn-primary mb-2">Book</button>
+
+                        </div>
+                    </div>
+                </form>
+             <div style="display:none"> <a href="" data-toggle="modal" data-target="#modalLRForm" id="loginform234"> <i class="fa fa-user" aria-hidden="true"></i>
+                login/signup</a> </div>
+
+            </div>
+        </div>
+        
+    </div>
+
+
+    <div class="img">
+
+        <h2>{{package_info.package_title}}</h2>
+        <img src="/media/{{package_info.package_images}}" class="img-fluid" alt="">
+
+    </div>
+    <div class="content">
+
+        <div class="disc">
+            <hr>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col icons">
+
+                        <div class="icon">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="sub-title">
+                            <p>Duration</p>
+                            <div id="tour-days" style="display:none"> {{package_info.package_duration}}</div>
+                            <p id="p2">{{package_info.package_dduration}} days {{package_info.package_duration|add:1}} nights</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col icons">
+
+                        <div class="icon">
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="sub-title">
+                            <p>Rating-({{ratings}} out of 5)</p>
+                            <p id="p2">
+                                <div class="stars-outer">
+          <div class="stars-inner"></div>
+        </div>
+                                <h6 style="padding-left: 5px;">{{reviews}}  reviews</h6>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="w-100"></div>
+
+
+                    <div class="col icons">
+
+                        <div class="icon">
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="sub-title">
+                            <p>Group size</p>
+                            <p id="p2">{{package_info.package_group_size}}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col icons">
+
+                        <div class="icon">
+                            <i class="fa fa-inr" aria-hidden="true"></i>
+                        </div>
+                        {% ifequal package.discount  0%}
+                        <div class="sub-title">
+                            <p>Price</p>
+                            {% ifequal currency "INR" %}
+                            <p id="p2">From - ₹ {{package.price|intcomma}} /-</p>
+                            {% endifequal %}
+                            {% ifequal currency "USD" %}
+                            <p id="p2">From - ₹ {{package.price|intcomma}} /-</p>
+                            {% endifequal %}
+                            {% ifequal currency "BHD" %}
+                            <p id="p2">From - ₹ {{package.price|intcomma}} /-</p>
+                            {% endifequal %}
+                            {% ifequal currency "AED" %}
+                            <p id="p2">From - ₹ {{package.price|intcomma}} /-</p>
+                            {% endifequal %}
+                        </div>
+                        {% else %}
+                         <div class="sub-title">
+                            <p>Price</p>
+                             {% ifequal currency "INR" %}
+                             <p id="p2">From - <strike>₹ {{package.tour.package_price|intcomma}}</strike><tab>{{package.price|intcomma}}</p>
+                            {% endifequal %}
+                            {% ifequal currency "USD" %}
+                             <p id="p2">From - <strike>₹ {{package.tour.package_price|intcomma}}</strike><tab>{{package.price|intcomma}}</p>
+                            {% endifequal %}
+                            {% ifequal currency "BHD" %}
+                             <p id="p2">From - <strike>₹ {{package.tour.package_price|intcomma}}</strike><tab>{{package.price|intcomma}}</p>
+                            {% endifequal %}
+                            {% ifequal currency "AED" %}
+                             <p id="p2">From - <strike>₹ {{package.tour.package_price|intcomma}}</strike><tab>{{package.price|intcomma}}</p>
+                            {% endifequal %}
+                           
+                        </div>
+
+                        {% endifequal %}
+                        
+
+                    </div>
+
+                </div>
+
+
+                <div class="book-btn">
+                    <button class="btn btn1" data-toggle="modal" data-target=".bd-example-modal-lg">Book Now</button>
+                    <button data-product="{{package.tour.package_title}}" type="submit"  data-action="add" class="btn btn2 update-cart">Add to Cart</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+    <hr style="margin: 5px 100px;">
+
+    <div class="overview">
+        <h4>Overview</h4>
+        <p>{{package_info.package_desc}}</p>
+    </div>
+
+    <hr style="margin: 5px 100px;">
+
+    <div class="itinerary-title">
+        <h2
+            style="text-align: center; font-family: 'Times New Roman', Times, serif; color: rgb(80, 77, 77); text-decoration: underline;">
+            Itinerary</h2>
+    </div>
+
+    <div class="itinerary">
+
+
+        <div class="vertical-line"></div>
+
+        <div class="days">
+        {% comment %} {% for j in package_info.package_routine   %} {% endcomment %}
+        {% ifequal package_info.package_routine.day1 "" %}
+        {% else %}
+          <div id="day1" data-aos="zoom-in">
+          
+                <h3>DAY 1</h3>
+                <h6>{{package_info.package_routine.day1}}
+                </h6>
+            </div>
+            {% endifequal %}
+             {% ifequal package_info.package_routine.day2 "" %}
+        {% else %}
+          <div id="day2" data-aos="zoom-in">
+          
+                <h3>DAY 2</h3>
+                <h6>{{package_info.package_routine.day2}}
+                </h6>
+            </div>
+            {% endifequal %}
+             {% ifequal package_info.package_routine.day3  "" %}
+        {% else %}
+          <div id="day3" data-aos="zoom-in">
+          
+                <h3>DAY 3</h3>
+                <h6>{{package_info.package_routine.day3}}
+                </h6>
+            </div>
+            {% endifequal %}
+             {% ifequal package_info.package_routine.day4 "" %}
+        {% else %}
+          <div id="day4" data-aos="zoom-in">
+          
+                <h3>DAY 4</h3>
+                <h6>{{package_info.package_routine.day4}}
+                </h6>
+            </div>
+            {% endifequal %}
+             {% ifequal package_info.package_routine.day5 "" %}
+        {% else %}
+          <div id="day5" data-aos="zoom-in">
+          
+                <h3>DAY 5</h3>
+                <h6>{{package_info.package_routine.day5}}
+                </h6>
+            </div>
+            {% endifequal %}
+             {% ifequal package_info.package_routine.day6 "" %}
+        {% else %}
+          <div id="day6" data-aos="zoom-in">
+          
+                <h3>DAY 6</h3>
+                <h6>{{package_info.package_routine.day6}}
+                </h6>
+            </div>
+            {% endifequal %}
+             {% ifequal package_info.package_routine.day7 "" %}
+        {% else %}
+          <div id="day7" data-aos="zoom-in">
+          
+                <h3>DAY 7</h3>
+                <h6>{{package_info.package_routine.day7}}
+                </h6>
+            </div>
+            {% endifequal %}
+             {% ifequal package_info.package_routine.day8 "" %}
+        {% else %}
+          <div id="day8" data-aos="zoom-in">
+          
+                <h3>DAY 8</h3>
+                <h6>{{package_info.package_routine.day8}}
+                </h6>
+            </div>
+            {% endifequal %}
+             {% ifequal package_info.package_routine.day9   "" %}
+        {% else %}
+          <div id="day9" data-aos="zoom-in">
+          
+                <h3>DAY 9</h3>
+                <h6>{{package_info.package_routine.day9}}
+                </h6>
+            </div>
+            {% endifequal %}
+             {% ifequal package_info.package_routine.day_10    "" %}
+        {% else %}
+          <div id="day10" data-aos="zoom-in">
+          
+                <h3>DAY 10</h3>
+                <h6>{{package_info.package_routine.day_10}}
+                </h6>
+            </div>
+            {% endifequal %} 
+             {% ifequal package_info.package_routine.day_11    "" %}
+        {% else %}
+          <div id="day11" data-aos="zoom-in">
+          
+                <h3>DAY 11</h3>
+                <h6>{{package_info.package_routine.day_11}}
+                </h6>
+            </div>
+            {% endifequal %}
+             {% ifequal package_info.package_routine.day_12   "" %}
+        {% else %}
+          <div id="day12" data-aos="zoom-in">
+          
+                <h3>DAY 12</h3>
+                <h6>{{package_info.package_routine.day_12}}
+                </h6>
+            </div>
+            {% endifequal %}
+            
+                </div>
+
+    </div>
+
+    <!-- included Facility  -->
+    <section class="section2">
+
+        <div class="itinerary" data-aos="zoom-in-up">
+            <h3 style="margin-left: 20px;">Included Facility</h3>
+        </div>
+
+        <div class="flex-container">
+            {% for related in package_info.package_service.all %}
+            
+            
+            <div class="flex-item-left" data-aos="flip-down">
+
+                <img class="img-flex" src="{% static 'assets/images/visa1.jpg'%}" alt="">
+                <h4 class="flex-img-title">{{ related.service }}</h4>
+
+            </div>
+        {% endfor %}
+
+
+
+           
+
+            <div class="flex-item-left" data-aos="flip-down">
+
+                <img class="img-flex" src="{% static 'assets/images/pexels-engin-akyurt-2736388.jpg'%}" alt="">
+                <h4 class="flex-img-title">4 Night Hotel accommodation</h4>
+
+            </div>
+
+            <div class="flex-item-left" data-aos="flip-down">
+
+
+                <img class="img-flex" src="{% static 'assets/images/breakfast-1804436_1280.jpg'%}" alt="">
+                <h4 class="flex-img-title">Daily Breakfast</h4>
+
+            </div>
+        </div>
+
+        <div class="flex-container">
+
+            <div class="flex-item-left" data-aos="flip-down">
+                <img class="img-flex" src="{% static 'assets/images/marina cruise.jpg'%}" alt="">
+                <h4 class="flex-img-title">Marina Cruise Dinner</h4>
+
+            </div>
+
+            <div class="flex-item-left" data-aos="flip-down">
+                <img class="img-flex" src="{% static 'assets/images/desert safari.jpg'%}" alt="">
+                <h4 class="flex-img-title">Desert Safari with Dinner</h4>
+
+            </div>
+
+            <div class="flex-item-left" data-aos="flip-down">
+                <img class="img-flex" src="{% static 'assets/images/dubai city tour.jpg'%}" alt="">
+                <h4 class="flex-img-title">Dubai City Tour</h4>
+
+            </div>
+
+        </div>
+
+        <div class="flex-container">
+
+            <div class="flex-item-left" data-aos="flip-down">
+                <img class="img-flex" src="{% static 'assets/images/airport.jpg'%}" alt="">
+                <h4 class="flex-img-title">Airport Transfers</h4>
+
+            </div>
+        </div>
+
+    </section>
+    <!-- included Facility  -->
+
+{% endblock content %}
+
+   
+
+
+{% block javacsript %}
+<script>
+var rating={{ratings}};
+var subtotal=(rating/5)*100;
+var star=(Math.round(subtotal / 10) * 10);
+  $(".stars-inner").css({"width":star+"%"});
+</script>
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+<!-- swipejs -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+    integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+    crossorigin="anonymous"></script>
+
+<!-- jQuery Custom Scroller CDN -->
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+
+
+<script>
+
+    const swiper_showcase = new Swiper('.showcase .swiper-container', {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: false,
+        slidesPerView: 1,
+        spaceBetween: 10,
+
+        //   If we need pagination
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 20
+            },
+            740: {
+                slidesPerView: 1,
+                spaceBetween: 20
+            },
+            840: {
+                slidesPerView: 2,
+                spaceBetween: 30
+            },
+            991: {
+                slidesPerView: 3,
+                spaceBetween: 40
+            },
+
+            1200: {
+                slidesPerView: 3,
+                spaceBetween: 40
+            },
+            1440: {
+                slidesPerView: 4,
+                spaceBetween: 40
+            }
+        }
+
+        // And if we need scrollbar
+        //   scrollbar: {
+        //     el: '.swiper-scrollbar',
+        //   },
+    });
+</script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+
+{% endblock javacsript %}

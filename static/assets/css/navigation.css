@@ -1,0 +1,264 @@
+/* variable */
+.stars-outer {
+  display: inline-block;
+  position: relative;
+  font-family: FontAwesome;
+}
+
+.stars-outer::before {
+  content: "\f006 \f006 \f006 \f006 \f006";
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-inner::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  color: #f8ce0b;
+}
+
+.form_error input {
+  border: 1px solid #d83d5a;
+}
+.form_success input {
+  border: 1px solid #0bf003;
+}
+.colors-red {
+  color: red;
+}
+.color-green {
+  color: green;
+}
+
+/* variable */
+:root {
+  --color-primary: rgb(60, 96, 255);
+  --color-secondary: black !important;
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary) !important;
+}
+
+.color-primary {
+  color: var(--color-primary);
+}
+
+.color-secondary {
+  color: var(--color-secondary);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+.top-header {
+  background-color: black;
+}
+
+.top-header .top-nav {
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 10px 0px;
+}
+
+.top-nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.top-nav ul li {
+  margin: 0 10px;
+}
+
+.top-nav ul li a {
+  color: white;
+}
+
+.top-nav ul li .fas {
+  margin-right: 5px;
+}
+
+.ml-auto {
+  margin-right: 50px;
+}
+
+.ml-auto li {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* navbar */
+.navbar {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.navbar .navbar-brand {
+  font-weight: 700;
+  color: black;
+}
+
+.navbar a.nav-link {
+  color: black;
+  border-bottom: 2px solid white;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.act {
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.navbar a.nav-link:hover {
+  border-bottom-color: var(--color-primary);
+}
+
+.lines {
+  width: 20px;
+  height: 3px;
+  background-color: black;
+  margin-top: 2px;
+  border-radius: 35%;
+}
+
+.nav-tabs .nav-item .nav-link {
+  color: rgb(0, 0, 0);
+}
+
+.fa-stack[data-count]:after {
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  content: attr(data-count);
+  font-size: 70%;
+  padding: 0.6em;
+  border-radius: 999px;
+  line-height: 0.75em;
+  color: white;
+  text-align: center;
+  min-width: 2em;
+  font-weight: bold;
+  background: rgb(161, 72, 161);
+}
+
+.dropdown-menu a i {
+  color: black;
+}
+
+.modal {
+  overflow: scroll;
+}
+
+.modal {
+  overflow-x: hidden;
+}
+
+.address {
+  display: flex;
+  margin-top: 10px;
+}
+
+.fa-eye {
+  position: absolute;
+  top: 18%;
+  right: 3%;
+  font-size: large;
+}
+
+.ml-auto {
+  margin-right: -50px;
+}
+
+#currencydrops {
+  margin-left: -80px;
+}
+
+.fa-eye-slash {
+  position: absolute;
+  top: 18%;
+  right: 3%;
+  font-size: large;
+}
+
+#validationDefault04,
+#validationDefault06 {
+  margin-right: 5px;
+}
+
+#validationDefault05,
+#validationDefault07 {
+  margin-left: 5px;
+}
+
+.form-control {
+  padding-left: 10px;
+}
+
+.form-select {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: red;
+}
+
+@media screen and (max-width: 360px) {
+  .top-nav ul li {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 323px) {
+  .top-nav ul li i {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .top-nav ul #email {
+    display: none;
+  }
+}
+@media screen and (max-width: 770px) {
+  .top-nav #email i,
+  #phone i {
+    display: none;
+  }
+
+  .top-nav ul #user-n a {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 839px) {
+  .swiper-container .swiper-button-prev,
+  .swiper-container .swiper-button-next {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1010px) {
+  #currencydrops {
+    margin-left: 0px;
+  }
+}

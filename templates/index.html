@@ -1,0 +1,869 @@
+{% extends 'base.html' %}
+ {% load humanize %} 
+{% load static %}
+{% load mathfilters %}
+{% block style %}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- custom CSS -->
+  <link rel="stylesheet" href="{% static  'assets/css/navigation.css' %}">
+  <link rel="stylesheet" href="{% static  'assets/css/index.css' %}">
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+  
+  <!-- swiper -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+{% endblock style %}
+{% block content %}
+{% load mathfilters %}
+  <!-- banner -->
+ <section id="banner">
+
+    
+		<div class="swiper-container">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+			<!-- Slides -->
+			{% if  banner.count %}
+			{% for slide in banner  %}
+			<div class="swiper-slide"><img class="banner" src="/media/{{slide.banner_image}}" height="500px" width="100%" alt="" srcset="">
+			</div>
+			{% endfor %}
+			
+			{% else %} 
+			<div class="swiper-slide"><img class="banner" src="{% static 'assets/images/schilthorn-3033448_1280.jpg' %}" height="500px" width="100%" alt="" srcset="">
+			</div>
+			<div class="swiper-slide"><img class="banner" src="{% static 'assets/images/schilthorn-3033448_1280.jpg'%}" height="500px" width="100%" alt="" srcset=""></div>
+			<div class="swiper-slide"><img class="banner" src="{% static 'assets/images/schilthorn-3033448_1280.jpg'%}" height="500px" width="100%" alt="" srcset=""></div>
+			{% endif %}
+			</div>
+			<div class="swiper-pagination"></div>
+			
+				<!-- If we need navigation buttons -->
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-button-next"></div>
+			
+		</div>
+
+</section>
+  <!-- !banner -->
+
+
+  <!-- search tab -->
+  <section>
+
+    <form class="search-form" method="post" action="/search/">
+      <h4>Where you want to go?</h4>
+      <div class="form-row align-items-center fixedElement">
+       {% csrf_token %}
+        <div class="col-auto">
+          <!-- <input type="text" class="" id="inlineFormInput" placeholder="Jane Doe"> -->
+
+          <input class="form-control mb-2" id="inlineFormElement" placeholder="Enter Destination" type="text"
+            list="FavoriteColor" id="color" name="dname">
+          <datalist id="FavoriteColor">
+            <option value="Kashmir">
+            <option value="Bali">
+            <option value="Bhutan">
+            <option value="Dubai">
+            <option value="Goa">
+            <option value="Gujarat">
+            <option value="Himachal Pradesh">
+            <option value="Kerala">
+            <option value="North East">
+            <option value="Thailand">
+          </datalist>
+
+        </div>
+
+        <div class="col-auto">
+          <input type="text" onfocus="(this.type='date')" class="form-control mb-2" id="inlineFormInput" placeholder="Starting Date" name="ddate">
+        </div>
+
+        <div class="col-auto">
+          <input type="text" onfocus="(this.type='date')" class="form-control mb-2" id="inlineFormInput" placeholder="End Date" name="edate">
+        </div>
+
+        <div class="col-auto">
+
+          <input class="form-control mb-2" id="inlineFormInput" placeholder="Enter Budget" type="text" list="budget"
+            name="dprice">
+          <datalist id="budget">
+            <option value="Rs. 40,000 - 50,000">
+            <option value="Rs. 50,000 - 60,000">
+            <option value="Rs. 60,000 - 70,000">
+            <option value="Rs. 70,000 - 80,000">
+            <option value="Rs. 80,000 - 90,000">
+            <option value="Rs. 90,000 - 1,00,000">
+            <option value="Rs. 1,00,000 - 1,20,000">
+            <option value="Rs. 1,20,000 - 1,40,000">
+            <option value="Rs. 1,40,000 - 1,60,000">
+            <option value="Rs. 1,60,000 - 2,00,000">
+          </datalist>
+
+        </div>
+
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-2">Search</button>
+        </div>
+      </div>
+    </form>
+  </section>
+  <!-- !search tab -->
+
+  <!-- Short intro title -->
+ <section id="short-intro">
+
+    <div class="container">
+      <div class="title">
+        <h4 class="title-primary title-primary">Tourastic Holidays</h4>
+        <h1 class="h1 h1-responsive title-secondary">Short Intro</h1>
+      </div>
+    </div>
+  </section>
+  <!-- !short intro title -->
+
+  <!-- our short intro -->
+ <section class="section2">
+
+    <div class="flex-container">
+      <div class="flex-item-left">
+
+        <img class="img-flex" src="{% static 'assets/images/location.png'%}" alt="">
+        <h4 class="flex-img-title">Top Destinations</h4>
+        <h5 class="flex-img-detail">We have Best Destinations to visit</h5>
+      </div>
+
+      <div class="flex-item-left">
+
+        <img class="img-flex" src="{% static 'assets/images/customer.png'%}" alt="">
+        <h4 class="flex-img-title">96% Happy Travelers</h4>
+        <h5 class="flex-img-detail">A feast we are really proud to present.</h5>
+      </div>
+
+      <div class="flex-item-left">
+
+
+        <img class="img-flex" src="{% static 'assets/images/tour-guide.png'%}" alt="">
+        <h4 class="flex-img-title">100+ Guides</h4>
+        <h5 class="flex-img-detail">We have an extensive local network of guides.</h5>
+      </div>
+    </div>
+
+    <div class="flex-container hide">
+
+      <div class="flex-item-left">
+        <img class="img-flex" src="{% static 'assets/images/customer-support.png'%}" alt="">
+        <h4 class="flex-img-title">Customize Packages</h4>
+        <h5 class="flex-img-detail">We have an extensive local network of guides.</h5>
+      </div>
+
+      <div class="flex-item-left">
+        <img class="img-flex" src="{% static 'assets/images/money-bag.png'%}" alt="">
+        <h4 class="flex-img-title">Lowest Price</h4>
+        <h5 class="flex-img-detail">We have an extensive local network of guides.</h5>
+      </div>
+
+      <div class="flex-item-left">
+        <img class="img-flex" src="{% static 'assets/images/handcraft.png'%}" alt="">
+        <h4 class="flex-img-title">Handcrafted</h4>
+        <h5 class="flex-img-detail">Tours designed after feedback from thousands of travellers.</h5>
+      </div>
+
+
+    </div>
+
+    <div class="flex-container">
+
+      <div class="flex-item-left">
+
+        <a href="#about-us"><button class="btn">More about us</button></a>
+
+      </div>
+
+    </div>
+</section>
+  <!-- !our short intro -->
+
+
+  <!-- popular destination title -->
+  <section id="popular-destinations">
+
+    <div class="container">
+      <div class="title">
+        <h4 class="title-primary">Tourastic Holidays</h4>
+        <h1 class="h1 h1-responsive title-secondary">Top Destinations</h1>
+      </div>
+    </div>
+  </section>
+  <!-- !popular destination title -->
+
+
+  <!-- top destinations -->
+  <main class="my-5">
+    <div class="container">
+      <!--Section: Content-->
+      <section class="text-center">
+        <!-- <h4 class="mb-5"><strong>Latest posts</strong></h4> -->
+
+        <div class="row">
+         {% if destination.count %}
+         {% for destination,tours in destinations  %}
+           <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card round">
+                  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                  <a href="/destination/{{destination.name}}">
+                  
+                    <img src="/media/{{destination.image}}" class="img-fluid round-img" />
+                    </a>
+                    <a href="/destination/{{destination.name}}">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                  </div>
+            </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{destination.name}}</h5>
+                  <a href="/destination/{{destination.name}}" class="btn btn-primary">{{tours}} Tours</a>
+                </div>
+          </div>
+        
+              
+              
+              {% endfor %}
+        </div>
+            {% else %}
+         <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card round">
+                  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" class="img-fluid round-img" />
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                  </div>
+            </div>
+                <div class="card-body">
+                  <h5 class="card-title">Switzerland</h5>
+                  <a href="#!" class="btn btn-primary">6 Tours</a>
+                </div>
+          </div>
+    
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card round">
+                  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="https://mdbootstrap.com/img/new/standard/nature/023.jpg" class="img-fluid round-img" />
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Switzerland</h5>
+                  <a href="#!" class="btn btn-primary">6 Tours</a>
+                </div>
+              </div>
+    
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card round">
+                  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" class="img-fluid round-img" />
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Switzerland</h5>
+                  <a href="#!" class="btn btn-primary">6 Tours</a>
+                </div>
+              </div>
+    
+        
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card round">
+                  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="https://mdbootstrap.com/img/new/standard/nature/002.jpg" class="img-fluid round-img" />
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Switzerland</h5>
+                  <a href="#!" class="btn btn-primary">6 Tours</a>
+                </div>
+            </div>
+    
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card round">
+                  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="https://mdbootstrap.com/img/new/standard/nature/022.jpg" class="img-fluid round-img" />
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Switzerland</h5>
+                  <a href="#!" class="btn btn-primary">6 Tours</a>
+                </div>
+              </div>
+    
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card round">
+                  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="https://mdbootstrap.com/img/new/standard/nature/035.jpg" class="img-fluid round-img"/>    
+                </img>  
+                
+                  </div>
+                  
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Switzerland</h5>
+                  <a href="#!" class="btn btn-primary">6 Tours</a>
+                </div>
+              </div>
+
+            </div>
+
+             {% endif %}
+     
+
+        
+      </section>
+
+    </div>
+  </main>
+
+
+  
+    
+
+<!-- top sales tours -->
+<section class="showcase">
+
+  <section id="tours-title">
+
+    <div class="container">
+      <div class="title">
+        <h4 class="title-primary title-primary-sale title-primary1">Tourastic Holidays</h4>
+        <h1 class="h1 h1-responsive title-secondary">Top Sales</h1>
+      </div>
+    </div>
+  </section>
+
+  <div class="swiper-container">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      {% if trending.count %}
+      {% for  i,j,k,l,m in trendingtours  %}
+      <div class="swiper-slide">
+              
+
+        <div class="card">
+
+          <!--Card image-->
+          <div class="view">
+        
+            <a href="/st_tour/{{i.package_title|slugify}}">
+            <img src="/media/{{i.package_images}}"
+              alt="photo">
+              </a>
+
+              {% ifequal  k 0%}
+            {% else %}
+              <div class="offer">
+                <button>upto {{k}}% OFF</button>
+              </div>
+              {% endifequal %}
+              
+            <!-- <a href="#">
+              <div class="mask rgba-white-slight"></div>
+            </a> -->
+          </div>
+
+          <!--Card content-->
+          <div class="card-body">
+            <!--Title-->
+            
+            <h4 class="card-title">{{i.package_title}}</h4>
+            <!--Text-->
+
+            <div class="rating-review" style="display: flex; margin-top: 10px;">
+
+              <div class="stars-outer ">
+          <div class="stars-inner" style="width:{{l|div:5|mul:100|div:10|floatformat:0|mul:10}}%">
+          
+          </div>
+        </div>
+              <h6 style="padding-left: 5px;">{{m}}  reviews</h6>
+
+            </div>
+            <div class="days-prices">
+
+              <div class="days">
+                <i class="fa fa-clock"></i>
+                <h6>{{i.package_duration}} Days {{i.package_duration|add:1}} Nights</h6>
+              </div>
+              {% ifequal k 0 %}
+              <div class="price">
+                <h6 class="text-from">From</h6>
+                <div class="round"
+                  style="display: flex; background-color: black; color: white; padding-top: 10px; border-radius: 10px; margin-left: 10px; padding-right: 10px;">
+                  {% ifequal currency  'USD'%}
+                  <i class="fa fa-dollar"></i>
+                  <h6>  {{j|intcomma}}/-</h6>
+                  {% endifequal %}
+                  {% ifequal currency  'INR'%}
+                  <i class="fa fa-inr"></i>
+                  <h6>  {{j|intcomma}}/-</h6>
+                  {% endifequal %}
+                  {% ifequal currency  'BHD'%}
+                  <i class="fa"></i>
+                  <h6>BHD   {{j|intcomma}}/-</h6>
+                  {% endifequal %}
+                  {% ifequal currency  'AED'%}
+                  <i class="fa"></i>
+                  <h6>AED   {{j|intcomma}}/-</h6>
+                  {% endifequal %}
+                  
+                  
+                </div>
+              </div>
+              {% else %}
+              <div class="price">
+              <h6 class="text-from">From</h6>
+                  <div class="round"
+                    style="display: flex; color: rgb(0, 0, 0); padding-top: 10px; border-radius: 10px; margin-left: 10px; padding-right: 10px;">
+                    {% ifequal currency  'USD'%}
+                  <i class="fa fa-dollar"></i>
+                  <h6>  {{i.package_price|intcomma}}/-</h6>
+                  {% endifequal %}
+                  {% ifequal currency  'INR'%}
+                  <i class="fa fa-inr"></i>
+                  <h6>  <strike>{{i.package_price|intcomma}}/-</strike></h6>
+                  {% endifequal %}
+                  {% ifequal currency  'BHD'%}
+                  <i class="fa"></i>
+                  <h6>BHD   <strike>{{i.package_price|intcomma}}/-</strike></h6>
+                  {% endifequal %}
+                  {% ifequal currency  'AED'%}
+                  <i class="fa"></i>
+                  <h6>AED  <strike> {{i.package_price|intcomma}}/-</strike></h6>
+                  {% endifequal %}
+                  </div>
+                </div>
+                <div class="price2">
+                  <div class="round"
+                    style="display: flex; background-color: black; color: white; padding-top: 10px; border-radius: 10px; margin-left: 10px; padding-right: 10px;">
+                   {% ifequal currency  'USD'%}
+                  <i class="fa fa-dollar"></i>
+                  <h6>  {{j|intcomma}}/-</h6>
+                  {% endifequal %}
+                  {% ifequal currency  'INR'%}
+                  <i class="fa fa-inr"></i>
+                  <h6>  {{j|intcomma}}/-</h6>
+                  {% endifequal %}
+                  {% ifequal currency  'BHD'%}
+                  <i class="fa"></i>
+                  <h6>BHD   {{j|intcomma}}/-</h6>
+                  {% endifequal %}
+                  {% ifequal currency  'AED'%}
+                  <i class="fa"></i>
+                  <h6>AED   {{j|intcomma}}/-</h6>
+                  {% endifequal %}
+                  
+                  </div>
+                </div>
+
+              {% endifequal %}
+            </div>
+            <div class="expand" style="margin-top: 90px; display: grid;">
+
+              <a href="/st_tour/{{i.package_title|slugify}}" style="text-align: center;">Expand Tour</a>
+            </div>
+          </div>
+
+        </div>
+        <!--/.Card-->
+
+      </div>
+
+
+       {% endfor %}
+        {% else %}
+ {% endif %}
+
+    </div>
+    
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- If we need scrollbar -->
+    <!-- <div class="swiper-scrollbar"></div> -->
+
+  </div>
+
+</section>
+
+
+
+
+  
+
+
+
+
+  
+
+ {% if testimonial.count %}
+<!-- testimonial -->
+<div class="testimonial">
+
+  <section id="tours-title">
+
+    <div class="container">
+      <div class="title">
+        <h4 style="font-size:xx-large;" class="title-primary title-primary1">Testimonials</h4>
+      </div>
+    </div>
+  </section>
+
+<div id="testiM" class="swiper-container">
+  <!-- Additional required wrapper -->
+  <div id="testimonial" class="swiper-wrapper">
+    <!-- Slides -->
+   {% for i in testimonial  %}
+   
+  
+    <div class="swiper-slide">
+      <div class="card">
+
+        <div class="inner-monial">
+        
+          <img src="/media/{{i.testi_image}}" alt="">
+
+          <h6 id="monial-name">{{i.name}}</h6>
+          <h6 id="post">{{i.profession}}</h6>
+
+          <p>{{i.review}}</p>
+        </div>
+        </div>
+        
+      </div>
+      {% endfor %}
+ 
+    </div>  
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev">
+        </div>
+        <div class="swiper-button-next"></div>
+  </div>
+
+  
+</div>
+</div>
+
+{% else %}
+{% endif %}
+
+  <!-- discount poster -->
+
+  <div class="box">
+    <img src="assets/images/discount.jpg" class="img-fluid blur" alt="Responsive image">
+
+    <div id="img-title">
+      <div class="title">
+        <h4 class="title-primary title-primary">Tourastic Holidays</h4>
+        <h1 class="h1 h1-responsive title-secondary">Get 10% Discount on online booking.</h1>
+      </div>
+    </div>
+
+  </div>
+  <!-- discount poster -->
+
+  <!-- about-us -->
+  <div id="about-us">
+    <div class="bg">
+      <div class="container py-5">
+        <div class="row h-100 align-items-center py-5">
+          <div class="col-lg-6">
+            <h3 class="">About us</h3>
+            <h1 class="display-4">Who are we?</h1>
+            <p class="lead text-muted mb-0">A Tourastic is a private travel agency that provides travel and
+              tourism-related services to the general public on behalf of accommodation or travel suppliers to offer
+              different kinds of travelling packages for each destination.</p>
+
+            <!-- <p class="lead text-muted">Snippet by <a href="https://bootstrapious.com/snippets" class="text-muted"> 
+                      <u>Bootstrapious</u></a>
+          </p> -->
+          </div>
+          <div class="col-lg-6 d-none d-lg-block"><img
+              src="https://res.cloudinary.com/mhmd/image/upload/v1556834136/illus_kftyh4.png" alt="" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white py-5">
+      <div class="container py-5">
+
+        <div class="row align-items-center">
+          <div class="col-lg-5 px-5 mx-auto"><img
+              src="https://res.cloudinary.com/mhmd/image/upload/v1556834139/img-1_e25nvh.jpg" alt=""
+              class="img-fluid mb-4 mb-lg-0"></div>
+          <div class="col-lg-6"><i class="fa fa-leaf fa-2x mb-3 text-primary"></i>
+            <h2 class="font-weight-light">Why we?</h2>
+            <p class="lead text-muted">Tourastic offer unique services for discerning clients.</p>
+            <p class="lead text-muted">Tourastic save your money — and if not, we deliver more value.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <img src="assets/images/wave (4).svg" alt="">
+    {% if members.count %}
+    <div class="py-5" style="background-color: rgb(27, 156, 173); margin-top: -10px;">
+      <div class="container py-5">
+       
+        <h2
+          style=" font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif; text-align: center; font-weight: 700; margin-bottom: 40px;">
+          Meet our team</h2>
+
+
+        <div class="row text-center">
+         {% for i in members  %}
+         
+        
+          <div class="col-xl-3 col-sm-6 mb-5">
+            <div class="bg-white rounded shadow-sm py-5 px-4"><img
+                src="/media/{{i.profile_image}}" alt="" width="100"
+                class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+              <h5 class="mb-0">{{i.name}}</h5><span class="small text-uppercase text-muted">{{i.position}}</span>
+              <ul class="social mb-0 list-inline mt-3">
+              {% ifequal  i.social_fb "" %}
+                <li class="list-inline-item"><a href="{{i.social_fb}}" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
+              {% endifequal %}
+                {% ifequal  i.social_twitter  ""%}
+                <li class="list-inline-item"><a href="{{i.social_twitter}}" class="social-link"><i class="fa fa-twitter"></i></a></li>
+                {% endifequal %}
+                {% ifequal i.social_insta  "" %}
+                <li class="list-inline-item"><a href="{{i.social_insta}}" class="social-link"><i class="fa fa-instagram"></i></a></li>
+                {% endifequal %}
+                {% ifequal i.social_linkln "" %}
+                <li class="list-inline-item"><a href="{{i.social_linkln}}" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+                {% endifequal %}
+              </ul>
+            </div>
+          </div>
+         
+ {% endfor %}
+       
+
+
+          
+
+        </div>
+      </div>
+    </div>
+    {% else %}
+    {% endif %}
+  </div>
+  <!-- about-us -->
+
+{% endblock content %}
+
+{% block javacsript %}
+ {% comment %} <script>
+        function ratings(rating){
+var subtotal=(rating/5)*100;
+var star=(Math.round(subtotal / 10) * 10);
+  $(".stars-inner").css({"width":star+"%"});}
+</script> {% endcomment %}
+
+
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+></script>
+
+<!-- Bootstrap tooltips -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
+></script>
+<!-- Bootstrap core JavaScript -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
+></script>
+<!-- MDB core JavaScript -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"
+></script>
+<!-- swipejs -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- Popper.JS -->
+<script
+  src="https://cdnjs.cloudflare.com /ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+  integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+  crossorigin="anonymous"
+></script>
+
+<!-- jQuery Custom Scroller CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+
+  <script>
+
+
+  const banner = new Swiper('#banner .swiper-container', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: true,
+    autoplay:true,
+
+    //   If we need pagination
+    pagination: {
+      el: '.swiper-pagination',
+    },
+
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+
+    // And if we need scrollbar
+    //   scrollbar: {
+    //     el: '.swiper-scrollbar',
+    //   },
+  });
+
+
+  
+  const swiper_showcase = new Swiper('.showcase .swiper-container', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: false,
+    slidesPerView: 1,
+    spaceBetween: 10,
+
+    //   If we need pagination
+    pagination: {
+      el: '.swiper-pagination',
+    },
+
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+        spaceBetween: 20
+      },
+      740: {
+        slidesPerView: 1,
+        spaceBetween: 20
+      },
+      840: {
+        slidesPerView: 2,
+        spaceBetween: 30
+      },
+      991: {
+        slidesPerView: 3,
+        spaceBetween: 40
+      },
+
+      1200: {
+        slidesPerView: 3,
+        spaceBetween: 40
+      },
+      1440: {
+        slidesPerView: 4,
+        spaceBetween: 40
+      }
+    }
+
+    // And if we need scrollbar
+    //   scrollbar: {
+    //     el: '.swiper-scrollbar',
+    //   },
+  });
+
+
+
+
+
+  const testimonial = new Swiper('.testimonial .swiper-container', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: false,
+    slidesPerView: 1,
+    spaceBetween: 10,
+
+    //   If we need pagination
+    pagination: {
+      el: '.swiper-pagination',
+    },
+
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+        spaceBetween: 20
+      },
+      740: {
+        slidesPerView: 1,
+        spaceBetween: 20
+      },
+      840: {
+        slidesPerView: 2,
+        spaceBetween: 30
+      },
+      991: {
+        slidesPerView: 3,
+        spaceBetween: 40
+      },
+
+      1200: {
+        slidesPerView: 3,
+        spaceBetween: 40
+      },
+      1440: {
+        slidesPerView: 5,
+        spaceBetween: 40
+      }
+    }
+
+    // And if we need scrollbar
+    //   scrollbar: {
+    //     el: '.swiper-scrollbar',
+    //   },
+  });
+
+</script>
+
+{% endblock javacsript %}

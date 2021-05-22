@@ -1,0 +1,16 @@
+  body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+  }
+.below-btn{
+
+    background-color: rgb(189, 197, 193);
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    padding: 5px 10px 5px 10px;
+}
+
+
+  
+  /*# sourceMappingURL=tour-packages.css.map */
